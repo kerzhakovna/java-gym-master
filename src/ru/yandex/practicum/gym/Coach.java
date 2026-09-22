@@ -12,9 +12,9 @@ public class Coach {
     private String middleName;
 
     public Coach(String surname, String name, String middleName) {
-        this.surname = surname;
-        this.name = name;
-        this.middleName = middleName;
+        this.surname = validateName(surname, "Surname must not be empty");
+        this.name = validateName(name, "Name must not be empty");
+        this.middleName = validateName(middleName, "Middle name must not be empty");
     }
 
     @Override
@@ -40,5 +40,13 @@ public class Coach {
 
     public String getMiddleName() {
         return middleName;
+    }
+
+    private String validateName(String name, String message) {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException(message);
+        }
+
+        return name;
     }
 }
