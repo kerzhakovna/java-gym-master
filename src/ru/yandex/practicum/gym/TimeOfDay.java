@@ -10,8 +10,8 @@ public class TimeOfDay implements Comparable<TimeOfDay> {
     private int minutes;
 
     public TimeOfDay(int hours, int minutes) {
-        this.hours = hours;
-        this.minutes = minutes;
+        this.hours = validateHours(hours);
+        this.minutes = validateMinutes(minutes);
     }
 
     @Override
@@ -38,6 +38,20 @@ public class TimeOfDay implements Comparable<TimeOfDay> {
     }
 
     public int getMinutes() {
+        return minutes;
+    }
+
+    private int validateHours(int hours) {
+        if (hours < 0 || hours > 23) {
+            throw new IllegalArgumentException("Hours must be greater than or equals to 0 and less than 24");
+        }
+        return hours;
+    }
+
+    private int validateMinutes(int minutes) {
+        if (minutes < 0 || minutes > 59) {
+            throw new IllegalArgumentException("Minutes must be greater than or equals to 0 and less than 60");
+        }
         return minutes;
     }
 }
